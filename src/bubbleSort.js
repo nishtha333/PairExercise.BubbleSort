@@ -1,19 +1,27 @@
-function bubbleSort(array, comparisonFnForSwap) {
-    if(!array.length) return array;
-    let wasSorted = true;
+class BubbleSort {
 
-    for(let i = 0; i < array.length-1; i++) {
-        for(let j = 0; j < array.length-i-1; j++) {
-            if(comparisonFnForSwap(array[j],array[j+1])) {
-                const temp = array[j];
-                array[j] = array[j+1];
-                array[j+1] = temp;
-                wasSorted = false;
+    static sort(array, comparisonFnForSwap) {
+        if(!array.length) return array;
+        let wasSorted = true;
+
+        for(let i = 0; i < array.length-1; i++) {
+            for(let j = 0; j < array.length-i-1; j++) {
+                if(comparisonFnForSwap(array[j],array[j+1])) {
+                    array = BubbleSort.swap(array, j);                
+                    wasSorted = false;
+                }
             }
+            if(wasSorted) break;
         }
-        if(wasSorted) break;
+        return array;
     }
-    return array;
+
+    static swap(array, index) {
+        const temp = array[index];
+        array[index] = array[index+1];
+        array[index+1] = temp;
+        return array;
+    }
 }
 
-module.exports = bubbleSort;
+module.exports = BubbleSort;
